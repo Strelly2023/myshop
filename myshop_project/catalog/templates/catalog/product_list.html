@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Product Catalog</title></head>
+<body>
+<h1>Products</h1>
+<form method="get">
+    <select name="category" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+<ul>
+    {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong> - ${{ product.price }}<br>
+            {{ product.description }}<br>
+            <a href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'cart_view' %}">View Cart</a>
+</body>
+</html>

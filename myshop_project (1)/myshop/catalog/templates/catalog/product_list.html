@@ -1,0 +1,16 @@
+<h1>Products</h1>
+<form method="get">
+  <select name="category" onchange="this.form.submit()">
+    <option value="">All Categories</option>
+    {% for category in categories %}
+      <option value="{{ category.id }}">{{ category.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a> - ${{ product.price }}
+    </li>
+  {% endfor %}
+</ul>

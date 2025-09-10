@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Catalog</title>
+</head>
+<body>
+    <h1>Our Products</h1>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong>: ${{ product.price }}<br>
+                {{ product.description }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

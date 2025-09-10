@@ -1,0 +1,1 @@
+<h1>Order Confirmation</h1><p>Reference: {{ order.reference }}</p><p>Total: ${{ order.total_amount }}</p><ul>{% for item in order.items.all %}<li>{{ item.product.name }} x {{ item.quantity }}</li>{% endfor %}</ul>

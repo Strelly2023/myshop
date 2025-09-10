@@ -1,0 +1,1 @@
+<h1>Your Cart</h1><form method="post" action="{% url 'update_cart' %}">{% csrf_token %}{% for item in cart_items %}<div>{{ item.product.name }} - ${{ item.product.price }} x <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}"></div>{% endfor %}<button type="submit">Update Cart</button></form><a href="{% url 'checkout' %}">Proceed to Checkout</a>

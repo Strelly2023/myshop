@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Cart</title></head>
+<body>
+<h2>Your Cart</h2>
+<ul>
+  {% for item in cart_items %}
+    <li>{{ item.product.name }} - {{ item.quantity }} x ${{ item.product.price }} = ${{ item.total_price }}</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'product_list' %}">Back to Products</a>
+</body>
+</html>
