@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poultry Management System - Desktop Prototype</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        nav { background-color: #2c3e50; padding: 10px; color: white; display: flex; gap: 20px; }
+        nav button { background-color: #34495e; color: white; border: none; padding: 10px; cursor: pointer; }
+        section { padding: 20px; display: none; }
+        .active { display: block; }
+        .metric { font-size: 24px; margin-bottom: 10px; }
+        form input, form button { margin: 5px; padding: 5px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <nav>
+        <button onclick="showScreen('dashboard')">Dashboard</button>
+        <button onclick="showScreen('inventory')">Inventory</button>
+        <button onclick="showScreen('health')">Health & Vaccination</button>
+    </nav>
+
+    <section id="dashboard" class="active">
+        <h2>Dashboard</h2>
+        <div class="metric" id="metric1">Temperature: -- °C</div>
+        <div class="metric" id="metric2">Humidity: -- %</div>
+        <div class="metric" id="metric3">Feed Level: -- kg</div>
+    </section>
+
+    <section id="inventory">
+        <h2>Inventory</h2>
+        <form onsubmit="addInventory(event)">
+            <input type="text" id="itemName" placeholder="Item Name" required>
+            <input type="number" id="itemQty" placeholder="Quantity" required>
+            <button type="submit">Add Item</button>
+        </form>
+        <table id="inventoryTable">
+            <tr><th>Item Name</th><th>Quantity</th></tr>
+        </table>
+    </section>
+
+    <section id="health">
+        <h2>Health & Vaccination</h2>
+        <form onsubmit="addHealthRecord(event)">
+            <input type="text" id="birdId" placeholder="Bird ID" required>
+            <input type="text" id="vaccine" placeholder="Vaccine Name" required>
+            <input type="date" id="date" required>
+            <button type="submit">Record</button>
+        </form>
+        <table id="healthTable">
+            <tr><th>Bird ID</th><th>Vaccine</th><th>Date</th></tr>
+        </table>
+    </section>
+
+    <script>
+        function showScreen(id) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function updateMetrics() {
+            document.getElementById('metric1').textContent = 'Temperature: ' + (20 + Math.random() * 5).toFixed(1) + ' °C';
+            document.getElementById('metric2').textContent = 'Humidity: ' + (50 + Math.random() * 10).toFixed(1) + ' %';
+            document.getElementById('metric3').textContent = 'Feed Level: ' + (100 + Math.random() * 20).toFixed(1) + ' kg';
+        }
+        setInterval(updateMetrics, 3000);
+        updateMetrics();
+
+        function addInventory(event) {
+            event.preventDefault();
+            const name = document.getElementById('itemName').value;
+            const qty = document.getElementById('itemQty').value;
+            const table = document.getElementById('inventoryTable');
+            const row = table.insertRow();
+            row.insertCell(0).textContent = name;
+            row.insertCell(1).textContent = qty;
+            event.target.reset();
+        }
+
+        function addHealthRecord(event) {
+            event.preventDefault();
+            const birdId = document.getElementById('birdId').value;
+            const vaccine = document.getElementById('vaccine').value;
+            const date = document.getElementById('date').value;
+            const table = document.getElementById('healthTable');
+            const row = table.insertRow();
+            row.insertCell(0).textContent = birdId;
+            row.insertCell(1).textContent = vaccine;
+            row.insertCell(2).textContent = date;
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
